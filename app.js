@@ -21,11 +21,11 @@ mongoose.connection.on('error', (err) => {
 /*MONGODB CONNECTION END*/
 
 require('./models/user')
-require('./models/product')
+
 
 app.use(express.json())
 app.use(require('./routes/auth'))
-app.use(require('./routes/product'))
+
 
 app.get('/', (req, res) => {
     res.send("Welcome here")

@@ -19,13 +19,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    contactNumber: {
+
+    mobile: {
         type: String,
         required: true
     },
  
 
     resetToken: String,
-    expiredToken: Date
+    expireToken: Date
 })
 mongoose.model("User", userSchema)

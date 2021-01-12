@@ -41,8 +41,8 @@ router.get('/allUsers', (req, res) => {
 
 //SIGNUP ROUTE START
 router.post('/signup', (req, res) => {
-    const { name, email, password, contactNumber } = req.body //take user details from frontend
-    if (!email || !name || !password || !contactNumber) { //if these fields are not present ,it sends a error with a status code of 422
+    const { name, email, password, mobile } = req.body //take user details from frontend
+    if (!email || !name || !password || !mobile) { //if these fields are not present ,it sends a error with a status code of 422
         return res.status(422).json({ error: "please add all the fields" })
     }
     User.findOne({ email: email }) //find user with the help of email
@@ -56,7 +56,7 @@ router.post('/signup', (req, res) => {
                         email,
                         name,
                         password: hashedpassword,
-                        contactNumber
+                        mobile
                     })
                     user.save()
                         .then(user => {
@@ -143,6 +143,7 @@ router.post('/changePassword', (req, res) => {
 //NEW PASSWORD ROUTE STARTS
 router.post('/new-password', (req, res) => {
     const newPassword = req.body.password
+  
     const sentToken = req.body.token
     User.findOne({ resetToken: sentToken, expireToken: { $gt: Date.now() } })
         .then(user => {
